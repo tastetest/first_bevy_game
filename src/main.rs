@@ -44,4 +44,4 @@ fn square_move(mut query: Query<&mut Transform, With<Square>>, keys: Res<Input<K
             transform.translation.x += 1.2;
         }
     }
-
+}
