@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy::app::AppExit;
 
 fn main() {
     App::new()
@@ -54,4 +55,5 @@ fn square_move(mut query: Query<&mut Transform, With<Square>>, keys: Res<Input<K
         }
     }
 }
+
 
