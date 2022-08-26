@@ -1,10 +1,19 @@
 [package]
+<<<<<<< HEAD
 name = "snake_bevy_game"
+=======
+name = "test_game"
+>>>>>>> c11f902b71002a0308e14abd55c4b7f7715b385c
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+<<<<<<< HEAD
 bevy = "0.8.0"
 rand = "0.7.3"
+=======
+bevy = "0.8"
+
+>>>>>>> c11f902b71002a0308e14abd55c4b7f7715b385c
