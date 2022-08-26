@@ -45,8 +45,3 @@ fn square_move(mut query: Query<&mut Transform, With<Square>>, keys: Res<Input<K
         }
     }
 
-fn square_move(mut query: Query<&mut Transform, With<Square>>) {
-        for mut transform in query.iter_mut() {
-            transform.translation += 1.2;
-        }
-}
