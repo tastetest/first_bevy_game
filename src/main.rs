@@ -23,8 +23,26 @@ fn spawn_square(mut commands: Commands, asset_server: Res<AssetServer>) {
 
 }
 
-fn square_move(mut query: Query<&mut Transform, With<Square>>) {
+fn square_move(mut query: Query<&mut Transform, With<Square>>, keys: Res<Input<KeyCode>>) {
+    if keys.pressed(KeyCode::W) {
         for mut transform in query.iter_mut() {
-            transform.translation += 1.2;
+            transform.translation.y += 1.2;
         }
+    }
+    if keys.pressed(KeyCode::A) {
+        for mut transform in query.iter_mut() {
+            transform.translation.x += -1.2;
+        }
+    }
+    if keys.pressed(KeyCode::S) {
+        for mut transform in query.iter_mut() {
+            transform.translation.y += -1.2;
+        }
+    }
+    if keys.pressed(KeyCode::D) {
+        for mut transform in query.iter_mut() {
+            transform.translation.x += 1.2;
+        }
+    }
+
 }
