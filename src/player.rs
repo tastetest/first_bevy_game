@@ -1,9 +1,9 @@
 use bevy::prelude::*;
 
 #[derive(Component)]
-pub struct Square;
+pub struct Player;
 
-pub fn spawn_square(mut commands: Commands, asset_server: Res<AssetServer>) {
+pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     let entity_spawn = Vec3::ZERO;
     commands.spawn_bundle(Camera2dBundle::default());
     commands.spawn_bundle(SpriteBundle {
@@ -12,11 +12,11 @@ pub fn spawn_square(mut commands: Commands, asset_server: Res<AssetServer>) {
             .with_scale(Vec3::splat(3.0)),
         ..default()
     })
-    .insert(Square);
+    .insert(Player);
 
 }
 
-pub fn square_move(mut query: Query<&mut Transform, With<Square>>, keys: Res<Input<KeyCode>>) {
+pub fn player_movement(mut query: Query<&mut Transform, With<Player>>, keys: Res<Input<KeyCode>>) {
     if keys.pressed(KeyCode::W) {
         for mut transform in query.iter_mut() {
             transform.translation.y += 1.2;
