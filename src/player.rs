@@ -1,11 +1,13 @@
 use bevy::prelude::*;
+use bevy_rapier2d::prelude::*;
 
 #[derive(Component)]
 pub struct Player;
 
 pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     let entity_spawn = Vec3::ZERO;
-    commands.spawn_bundle(Camera2dBundle::default());
+    commands
+    .spawn_bundle(Camera2dBundle::default());
     commands.spawn_bundle(SpriteBundle {
         texture: asset_server.load("./character.png"),
         transform: Transform::from_translation(entity_spawn)
@@ -39,3 +41,9 @@ pub fn player_movement(mut query: Query<&mut Transform, With<Player>>, keys: Res
     }
 }
 
+pub fn player_physics(mut commands: Commands) {
+    commands.spawn()
+        .insert(RigidBody::Dynamic)
+        .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 1.0)))
+        .insert(Collider::cuboid(3.0, 3.0));
+}
