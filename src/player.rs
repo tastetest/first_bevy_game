@@ -10,16 +10,17 @@ pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn_bundle(SpriteBundle {
         texture: asset_server.load("./player.png"),
         transform: Transform::from_translation(entity_spawn)
-            .with_scale(Vec3::splat(3.0)),
+            .with_scale(Vec3::splat(10.0)),
         ..default()
     })
-    .insert(RigidBody::Dynamic)
-    .insert(Collider::cuboid(3.0, 3.0))
+    .insert(RigidBody::Fixed)
+    .insert(Collider::cuboid(5.0, 5.0))
     .insert(Player);
 
 }
 
 pub fn player_movement(mut query: Query<&mut Transform, With<Player>>, keys: Res<Input<KeyCode>>) {
+
     if keys.pressed(KeyCode::W) {
         for mut transform in query.iter_mut() {
             transform.translation.y += 1.2;
@@ -40,5 +41,6 @@ pub fn player_movement(mut query: Query<&mut Transform, With<Player>>, keys: Res
             transform.translation.x += 1.2;
         }
     }
+
 }
 
