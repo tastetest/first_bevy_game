@@ -2,6 +2,8 @@ use bevy::prelude::*;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::render::texture::ImageSettings;
 use bevy_rapier2d::prelude::*;
+use bevy_ecs_ldtk::prelude::*;
+use std::collections::HashSet;
 
 mod player;
 
@@ -16,6 +18,12 @@ fn main() {
         .add_startup_system(setup_physics)
         .add_system(player::player_movement)
         .add_system(bevy::window::close_on_esc)
+        .insert_resource(LdtkSettings {
+            level_spawn_behavior: LevelSpawnBehavior::UseWorldTranslation {
+                load_level_neighbors: false,
+            },
+            ..Default::default()
+        })
         .add_plugin(LogDiagnosticsPlugin::default())
         .add_plugin(FrameTimeDiagnosticsPlugin::default())
         .run();
