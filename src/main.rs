@@ -25,22 +25,14 @@ fn main() {
 fn setup_physics(mut commands: Commands) {
     commands
         .spawn()
-        .insert(Collider::cuboid(100.0, 100.0,))
-        .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, -100.0, 0.0)));
+        .insert(Collider::cuboid(300.0, 100.0,))
+        .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, -300.0, 0.0)));
     commands
         .spawn()
         .insert(RigidBody::Dynamic)
         .insert(Collider::ball(50.0))
+        .insert(ActiveCollisionTypes::default())
         .insert(Restitution::coefficient(0.7))
         .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 400.0, 0.0)));
 }
-
-#[derive(Copy, Debug, Clone, Default, Component)]
-pub struct Wall;
-
-#[derive(Clone, Debug, Default, Bundle, LdtkIntCell)]
-pub struct WallBundle {
-    wall: Wall,
-}
-
 

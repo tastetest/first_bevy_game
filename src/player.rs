@@ -13,7 +13,8 @@ pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
             .with_scale(Vec3::splat(10.0)),
         ..default()
     })
-    .insert(RigidBody::Fixed)
+    .insert(RigidBody::Dynamic)
+    .insert(LockedAxes::ROTATION_LOCKED)
     .insert(Collider::cuboid(5.0, 5.0))
     .insert(Player);
 
