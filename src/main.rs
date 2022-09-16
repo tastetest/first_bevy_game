@@ -2,7 +2,6 @@ use bevy::prelude::*;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::render::texture::ImageSettings;
 use bevy_rapier2d::prelude::*;
-use bevy_ecs_ldtk::prelude::*;
 
 mod player;
 
