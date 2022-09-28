@@ -14,34 +14,35 @@ pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
         ..default()
     })
     .insert(RigidBody::Dynamic)
+    .insert(Velocity::linear(Vec2::ZERO))
+    .insert(ActiveEvents::COLLISION_EVENTS)
     .insert(LockedAxes::ROTATION_LOCKED)
     .insert(Collider::cuboid(5.0, 5.0))
     .insert(Player);
 
 }
 
-pub fn player_movement(mut query: Query<&mut Transform, With<Player>>, keys: Res<Input<KeyCode>>) {
+pub fn player_movement(time: Res<Time>, mut query: Query<&mut Transform, With<Player>>, keys: Res<Input<KeyCode>>) {
 
     if keys.pressed(KeyCode::W) {
         for mut transform in query.iter_mut() {
-            transform.translation.y += 1.2;
+            transform.translation.y += 100.2 * time.delta_seconds();
         }
     }
     if keys.pressed(KeyCode::A) {
         for mut transform in query.iter_mut() {
-            transform.translation.x += -1.2;
+            transform.translation.x += -100.2 * time.delta_seconds();
         }
     }
     if keys.pressed(KeyCode::S) {
         for mut transform in query.iter_mut() {
-            transform.translation.y += -1.2;
+            transform.translation.y += -100.2 * time.delta_seconds();
         }
     }
     if keys.pressed(KeyCode::D) {
         for mut transform in query.iter_mut() {
-            transform.translation.x += 1.2;
+            transform.translation.x += 100.2 * time.delta_seconds();
         }
     }
 
 }
-
