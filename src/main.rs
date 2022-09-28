@@ -2,6 +2,7 @@ use bevy::prelude::*;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::render::texture::ImageSettings;
 use bevy_rapier2d::prelude::*;
+use bevy_ecs_ldtk::prelude::*;
 
 mod player;
 
@@ -11,6 +12,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugin(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(100.0))
         .add_plugin(RapierDebugRenderPlugin::default())
+        .add_plugin(LdtkPlugin)
         .insert_resource(ClearColor(Color::rgb(0.0, 0.0, 0.0)))
         .add_startup_system(player::spawn_player)
         .add_startup_system(setup_physics)
@@ -35,3 +37,9 @@ fn setup_physics(mut commands: Commands) {
         .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 400.0, 0.0)));
 }
 
+fn setup_ldtk(mut commands: Commands, asset_server: Res<AssetServer>) {
+    commands.spawn_bundle(LdtkWorldBundle {
+        ldtk_handle: asset_server.load("a_project.ldtk"),
+        ..Default::default()
+    });
+}
