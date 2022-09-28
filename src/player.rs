@@ -24,22 +24,22 @@ pub fn player_movement(mut query: Query<&mut Transform, With<Player>>, keys: Res
 
     if keys.pressed(KeyCode::W) {
         for mut transform in query.iter_mut() {
-            transform.translation.y += 1.2;
+            transform.translation.y += 100.2;
         }
     }
     if keys.pressed(KeyCode::A) {
         for mut transform in query.iter_mut() {
-            transform.translation.x += -1.2;
+            transform.translation.x += -100.2;
         }
     }
     if keys.pressed(KeyCode::S) {
         for mut transform in query.iter_mut() {
-            transform.translation.y += -1.2;
+            transform.translation.y += -100.2;
         }
     }
     if keys.pressed(KeyCode::D) {
         for mut transform in query.iter_mut() {
-            transform.translation.x += 1.2;
+            transform.translation.x += 100.2;
         }
     }
 
