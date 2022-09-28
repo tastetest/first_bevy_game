@@ -26,38 +26,22 @@ pub fn player_movement(time: Res<Time>, mut query: Query<&mut Transform, With<Pl
 
     if keys.pressed(KeyCode::W) {
         for mut transform in query.iter_mut() {
-<<<<<<< HEAD
-            transform.translation.y += 100.2;
-=======
             transform.translation.y += 100.2 * time.delta_seconds();
->>>>>>> 1a8196825a39c64ad1d06ed69413e5dc8cb12559
         }
     }
     if keys.pressed(KeyCode::A) {
         for mut transform in query.iter_mut() {
-<<<<<<< HEAD
-            transform.translation.x += -100.2;
-=======
             transform.translation.x += -100.2 * time.delta_seconds();
->>>>>>> 1a8196825a39c64ad1d06ed69413e5dc8cb12559
         }
     }
     if keys.pressed(KeyCode::S) {
         for mut transform in query.iter_mut() {
-<<<<<<< HEAD
-            transform.translation.y += -100.2;
-=======
             transform.translation.y += -100.2 * time.delta_seconds();
->>>>>>> 1a8196825a39c64ad1d06ed69413e5dc8cb12559
         }
     }
     if keys.pressed(KeyCode::D) {
         for mut transform in query.iter_mut() {
-<<<<<<< HEAD
-            transform.translation.x += 100.2;
-=======
             transform.translation.x += 100.2 * time.delta_seconds();
->>>>>>> 1a8196825a39c64ad1d06ed69413e5dc8cb12559
         }
     }
 
