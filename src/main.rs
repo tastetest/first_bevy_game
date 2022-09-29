@@ -14,8 +14,11 @@ fn main() {
         .add_plugin(RapierDebugRenderPlugin::default())
         .add_plugin(LdtkPlugin)
         .insert_resource(ClearColor(Color::rgb(0.0, 0.0, 0.0)))
+        .insert_resource(LevelSelection::Index(0))
+        .register_ldtk_entity::<MyBundle>("MyEntityIdentifier")
         .add_startup_system(player::spawn_player)
         .add_startup_system(setup_physics)
+        .add_startup_system(setup_ldtk)
         .add_system(player::player_movement)
         .add_system(bevy::window::close_on_esc)
         .add_plugin(LogDiagnosticsPlugin::default())
@@ -38,8 +41,24 @@ fn setup_physics(mut commands: Commands) {
 }
 
 fn setup_ldtk(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let ldtk_handle = asset_server.load("my_project.ldtk");
     commands.spawn_bundle(LdtkWorldBundle {
-        ldtk_handle: asset_server.load("a_project.ldtk"),
+        ldtk_handle,
         ..Default::default()
     });
+}
+
+#[derive(Default, Component)]
+struct ComponentA;
+
+#[derive(Default, Component)]
+struct ComponentB;
+
+#[derive(Bundle, LdtkEntity)] 
+pub struct MyBundle {
+    a: ComponentA,
+    b: ComponentB,
+    #[sprite_sheet_bundle]
+    #[bundle]
+    sprite_bundle: SpriteSheetBundle,
 }
