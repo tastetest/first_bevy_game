@@ -8,3 +8,8 @@
 4. add in player health, with limited amount of lives.
 
 
+5. implement multiplayer:
+-- maybe use tokio or other multiplayer libraries?
+-- or instead of tokio, use naia which is built for bevy multiplayer instead of just async calls
+
+

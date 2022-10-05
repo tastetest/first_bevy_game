@@ -1,10 +1,11 @@
-use bevy::prelude::*;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
+use bevy::prelude::*;
 use bevy::render::texture::ImageSettings;
-use bevy_rapier2d::prelude::*;
 use bevy_ecs_ldtk::prelude::*;
+use bevy_rapier2d::prelude::*;
 
 mod player;
+mod ui;
 
 fn main() {
     App::new()
@@ -14,8 +15,11 @@ fn main() {
         .add_plugin(RapierDebugRenderPlugin::default())
         .add_plugin(LdtkPlugin)
         .insert_resource(ClearColor(Color::rgb(0.0, 0.0, 0.0)))
+        .insert_resource(LevelSelection::Index(0))
+        .register_ldtk_entity::<MyBundle>("MyEntityIdentifier")
         .add_startup_system(player::spawn_player)
         .add_startup_system(setup_physics)
+        .add_startup_system(setup_ldtk)
         .add_system(player::player_movement)
         .add_system(bevy::window::close_on_esc)
         .add_plugin(LogDiagnosticsPlugin::default())
@@ -26,7 +30,7 @@ fn main() {
 fn setup_physics(mut commands: Commands) {
     commands
         .spawn()
-        .insert(Collider::cuboid(300.0, 100.0,))
+        .insert(Collider::cuboid(300.0, 100.0))
         .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, -300.0, 0.0)));
     commands
         .spawn()
@@ -38,8 +42,24 @@ fn setup_physics(mut commands: Commands) {
 }
 
 fn setup_ldtk(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let ldtk_handle = asset_server.load("my_project.ldtk");
     commands.spawn_bundle(LdtkWorldBundle {
-        ldtk_handle: asset_server.load("a_project.ldtk"),
+        ldtk_handle,
         ..Default::default()
     });
+}
+
+#[derive(Default, Component)]
+struct ComponentA;
+
+#[derive(Default, Component)]
+struct ComponentB;
+
+#[derive(Bundle, LdtkEntity)]
+pub struct MyBundle {
+    a: ComponentA,
+    b: ComponentB,
+    #[sprite_sheet_bundle]
+    #[bundle]
+    sprite_bundle: SpriteSheetBundle,
 }
