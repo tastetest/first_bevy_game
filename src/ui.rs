@@ -4,12 +4,6 @@ use bevy::{
     winit::WinitSettings,
 };
 
-fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {}
-   commands
-    .spawn_bundle(NodeBundle {
-            style: Style {
-                size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
-                
-            }
-        })
+pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+    //do some magic here pls
 }

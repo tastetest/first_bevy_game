@@ -20,6 +20,7 @@ fn main() {
         .add_startup_system(player::spawn_player)
         .add_startup_system(setup_physics)
         .add_startup_system(setup_ldtk)
+        .add_startup_system(ui::setup)
         .add_system(player::player_movement)
         .add_system(bevy::window::close_on_esc)
         .add_plugin(LogDiagnosticsPlugin::default())
