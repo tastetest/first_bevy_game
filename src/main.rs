@@ -3,6 +3,7 @@ use bevy::prelude::*;
 use bevy::render::texture::ImageSettings;
 use bevy_ecs_ldtk::prelude::*;
 use bevy_rapier2d::prelude::*;
+use bevy_ninepatch::{NinePatchBuilder, NinePatchBundle, NinePatchData, NinePatchPlugin};
 
 mod player;
 mod ui;
@@ -14,6 +15,7 @@ fn main() {
         .add_plugin(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(100.0))
         .add_plugin(RapierDebugRenderPlugin::default())
         .add_plugin(LdtkPlugin)
+        .add_plugin(NinePatchPlugin::<()>::default())
         .insert_resource(ClearColor(Color::rgb(0.0, 0.0, 0.0)))
         .insert_resource(LevelSelection::Index(0))
         .register_ldtk_entity::<MyBundle>("MyEntityIdentifier")
